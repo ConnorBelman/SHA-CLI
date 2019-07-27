@@ -84,7 +84,7 @@ fn process_blocks(blocks: Vec<[u64; 8]>) -> [u32; 8] {
 }
 
 pub fn generate(message: String) -> String {
-	let blocks = preprocess::pre_process(message);
+	let blocks = preprocess::pre_process_512(message);
 	let h = process_blocks(blocks);
 	let digest = format!("{:0>8X}{:0>8X}{:0>8X}{:0>8X}{:0>8X}{:0>8X}{:0>8X}{:0>8X}", h[0], h[1], h[2], h[3], h[4], h[5], h[6], h[7]);
 	digest

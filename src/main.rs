@@ -3,6 +3,7 @@ extern crate clap;
 
 mod sha1;
 mod sha256;
+mod sha512;
 
 use std::fs;
 use clap::{Arg, App};
@@ -42,6 +43,7 @@ fn main() {
                 match matches.value_of("variant").unwrap() {
                         "1" => output = sha1::generate(message),
                         "256" => output = sha256::generate(message),
+                        "512" => output = sha512::generate(message),
                         _ => output = "Error: invalid variant".to_string()
                 };
         }
