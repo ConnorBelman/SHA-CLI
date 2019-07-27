@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate clap;
 
+mod sha0;
 mod sha1;
 mod sha224;
 mod sha256;
@@ -15,9 +16,10 @@ fn main() {
         .version(crate_version!())
         .author("Connor Belman")
         .about("Simple SHA hash program for the command line")
+        .after_help("Available Variants: 0, 1, 224, 256, 384, 512")
         .arg(Arg::with_name("variant")
                 .required(true)
-                .help("desired hash variant (1, 256)"))
+                .help("desired hash variant"))
         .arg(Arg::with_name("from_file")
         	.short("f")
         	.long("file")
@@ -43,6 +45,7 @@ fn main() {
                         message = fs::read_to_string(input).expect("could not read file");
                 }
                 match matches.value_of("variant").unwrap() {
+                        "0" => output = sha0::generate(message),
                         "1" => output = sha1::generate(message),
                         "224" => output = sha224::generate(message),
                         "256" => output = sha256::generate(message),
