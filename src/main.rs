@@ -2,6 +2,7 @@
 extern crate clap;
 
 mod sha1;
+mod sha224;
 mod sha256;
 mod sha384;
 mod sha512;
@@ -43,6 +44,7 @@ fn main() {
                 }
                 match matches.value_of("variant").unwrap() {
                         "1" => output = sha1::generate(message),
+                        "224" => output = sha224::generate(message),
                         "256" => output = sha256::generate(message),
                         "384" => output = sha384::generate(message),
                         "512" => output = sha512::generate(message),
